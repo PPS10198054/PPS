@@ -57,6 +57,10 @@ En esta última práctica, se instaló y configuró **mod_evasive**, un módulo 
 #### **4.2 Pruebas de Carga y Validación**
 Para comprobar el correcto funcionamiento de **mod_evasive**, se utilizó **ApacheBench (ab)** para simular múltiples solicitudes al servidor.
 
+Se puede observar en la imagen, los logs del apache donde está rechazando las peticiones desde donde se está realizando el ataque DDOS.
+
+![Prueba del bloqueo de las peticiones](assets/validacionAtaqueDDos.png)
+
 **Comando utilizado para la prueba de carga:**
 `bash`
 `ab -n 1000 -c 10 https://localhost:8080/`
