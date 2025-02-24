@@ -34,9 +34,9 @@ Al realizar estas pruebas, podemos observar que si el servidor es atacado con de
 
 A continuación, se incluyen los enlaces a Docker Hub donde se pueden encontrar las imágenes Docker utilizadas durante las prácticas:
 
-- **Imagen Docker de Apache (Práctica 1)**: [Enlace a Docker Hub](https://hub.docker.com/r/yourusername/apache-practica1)
-- **Imagen Docker con ModSecurity (Práctica 2)**: [Enlace a Docker Hub](https://hub.docker.com/r/yourusername/apache-modsecurity)
-- **Imagen Docker con mod_evasive (Práctica 3)**: [Enlace a Docker Hub](https://hub.docker.com/r/yourusername/apache-modevasive)
+- **Imagen Docker de Apache (Práctica 1)**: [Enlace a Docker Hub](https://hub.docker.com/repository/docker/pps10198054/pr3.1.1/general)
+- **Imagen Docker con ModSecurity (Práctica 2)**: [Enlace a Docker Hub](https://hub.docker.com/repository/docker/pps10198054/pr3.1.2/general)
+- **Imagen Docker con mod_evasive (Práctica 3)**: [Enlace a Docker Hub](https://hub.docker.com/repository/docker/pps10198054/pr3.1.3/general)
 
 ---
 
@@ -45,10 +45,10 @@ A continuación, se incluyen los enlaces a Docker Hub donde se pueden encontrar 
 A continuación se muestran algunas imágenes de validación durante las prácticas para verificar la correcta configuración y funcionamiento de los servidores web:
 
 1. **Página web servida por Apache**:
-   ![Página web estática servida por Apache](images/pagina_estatica.png)
+   ![Página web con CSF aplicado, se puede observar la cabecera que lo verifica](assets/validacionCSFBuena.png)
 
 2. **Respuesta bloqueada por ModSecurity**:
-   ![Respuesta 403 bloqueada por ModSecurity](images/response_403_modsecurity.png)
+   ![Respuesta 403 bloqueada por ModSecurity](assets/pruebaWAF.png)
 
 3. **Respuesta bloqueada por mod_evasive (Ataque DoS)**:
    ![Respuesta bloqueada por mod_evasive](images/response_modevasive.png)
