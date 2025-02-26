@@ -83,15 +83,6 @@ Para asegurar las comunicaciones entre el servidor y los usuarios, se instaló u
 2. Configuración de **Apache** para usar este certificado en el puerto **443** (HTTPS).
 3. Modificación del **Dockerfile** para incluir la instalación y configuración del certificado SSL.
 
-#### **Generación del certificado SSL (fuera del contenedor):**
-
-```bash
-mkdir -p certs
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout certs/apache-selfsigned.key \
-    -out certs/apache-selfsigned.crt \
-    -subj "/C=US/ST=State/L=City/O=Organization/OU=IT/CN=localhost"
-
 Una vez generado el certificado localmente, se copia al contenedor durante la construcción de la imagen Docker.
 
 ### Captura de pantalla del certificado SSL en la web:
@@ -101,6 +92,17 @@ Una vez generado el certificado localmente, se copia al contenedor durante la co
 [Enlace a Docker Hub](https://hub.docker.com/repository/docker/pps10198054/pr3.1.4/general)
 
 Para probarlo, inicia el contenedor y accede a la web mediante **HTTPS**.
+
+#### **Generación del certificado SSL (fuera del contenedor):**
+
+```bash
+mkdir -p certs
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout certs/apache-selfsigned.key \
+    -out certs/apache-selfsigned.crt \
+    -subj "/C=US/ST=State/L=City/O=Organization/OU=IT/CN=localhost"
+
+
 
 
 
