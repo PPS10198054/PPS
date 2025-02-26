@@ -16,6 +16,8 @@ La **Content Security Policy (CSP)** es una medida de seguridad que ayuda a prev
 3. **Restricción de fuentes de contenido** externas, permitiendo solo fuentes de confianza.
 4. **Pruebas de efectividad** utilizando contenido embebido y scripts **inline**.
 
+![Configuración de los encabezados CSP](assets/csfConf.png)
+
 #### **Resultado:**
 El encabezado CSP se incluyó correctamente, impidiendo que se cargaran fuentes no autorizadas o scripts maliciosos.
 
