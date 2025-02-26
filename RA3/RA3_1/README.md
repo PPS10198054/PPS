@@ -56,6 +56,7 @@ En esta práctica, se instaló y configuró el módulo **mod_evasive** de Apache
 **Pasos realizados:**
 1. Instalación de **mod_evasive** en Apache.
 2. **Configuración de reglas de protección** para limitar el número de solicitudes permitidas por cliente en un período corto de tiempo.
+![Configuración de reglas de protección](assets/evasive.conf.png)
 3. Configuración de **logs y notificaciones** por correo electrónico en caso de ataques.
 
 #### **4.2 Pruebas de Carga y Validación**
