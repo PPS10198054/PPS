@@ -50,7 +50,7 @@ Además, necesitarás el archivo de diccionario de contraseñas, como `rockyou.t
 
 ## Código de Solución
 
-El código de solución está disponible en el archivo `code/brute_force.py`. Este script realiza el ataque de fuerza bruta, gestionando la extracción dinámica del token CSRF y la iteración a través de un diccionario de contraseñas.
+El código de solución está disponible en el archivo [code/brute_force.py](code/brute_force.py). Este script realiza el ataque de fuerza bruta, gestionando la extracción dinámica del token CSRF y la iteración a través de un diccionario de contraseñas.
 
 ## Resultado Esperado
 
