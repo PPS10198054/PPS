@@ -1,26 +1,37 @@
-# RA3_1
+# File Inclusion en DVWA (Security Level: High)
 
-Introduction [INTRO](URL_TASKS) :
+## Descripción
 
-# Tasks
+En este desafío de **File Inclusion**, la aplicación permite incluir archivos a través de una ruta proporcionada por el usuario. Sin embargo, existe una restricción: el nombre del archivo debe comenzar con `file`.
 
-* [TASK_1](#URL_TASK_1): XXX
-* [TASK_2](#URL_TASK_2): XXX
+## Explotación
 
-# Task_1
+Podemos aprovechar una vulnerabilidad de **Path Traversal** para acceder a archivos sensibles del sistema.  
+Dado que el backend concatena nuestra entrada con la ruta del archivo, podemos intentar escapar de la restricción utilizando:
 
-Intro...
-
-![IMG](URL_IMG)
-
-Example code:
-
-```
-$ git clone https://github.com/openssh/openssh-portable
-$ patch -p1 < ~/path/to/openssh.patch
-$ autoreconf
-$ ./configure
-$ make
+```bash
+file/../../../../../../etc/passwd
 ```
 
-# Task_2
+### Salida esperada:
+
+![File Inclusion Output](assets/images/fileInclusionHigh.png)
+
+Si la explotación es exitosa, se mostrará el contenido del archivo `/etc/passwd`, que contiene información sobre los usuarios del sistema.
+
+## Impacto
+
+Si esta vulnerabilidad no está mitigada, un atacante puede:
+
+- Acceder a archivos críticos del sistema.
+- Leer archivos de configuración con credenciales sensibles.
+- Incluir archivos PHP y ejecutar código malicioso (si es **Remote File Inclusion**).
+
+## Solución
+
+Para prevenir esta vulnerabilidad, se recomienda:
+
+- Restringir los archivos que pueden incluirse mediante listas blancas.
+- No permitir entradas del usuario sin validación y sanitización.
+- Usar rutas absolutas y seguras en el código backend.
+
