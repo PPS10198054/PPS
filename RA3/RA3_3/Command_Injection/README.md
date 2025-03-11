@@ -31,7 +31,7 @@ El servidor ejecutará `ping localhost | ls`, lo que listará los archivos en el
 
 Salida esperada:
 
-![Command Injection Output](assets/images/command_injection.png)
+![Command Injection Output](assets/images/commandInjection.png)
 
 ## Impacto
 
