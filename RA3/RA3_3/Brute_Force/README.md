@@ -57,3 +57,7 @@ El código de solución está disponible en el archivo `code/brute_force.py`. Es
 Cuando el script encuentre la contraseña correcta, imprimirá un mensaje similar al siguiente:
 
 ![Resultado de la fuerza bruta](assets/images/bruteForceHigh.png)
+
+Después se añadió el usuario y la contraseña para ver si eran correctos y este es el resultado 
+
+![Resultado final de la fuerza bruta](assets/images/pruebaBruteForce.png)
