@@ -1,26 +1,29 @@
-# RA3_1
+## Security Level: Low
 
-Introduction [INTRO](URL_TASKS) :
+En este nivel, se nos solicita enviar la palabra "success" para ganar.
 
-# Tasks
+Tenemos la frase `ChangeMe` y debemos cambiarla a "success". Además, hay un token cuyo valor es `md5(rot13(phrase))`.
 
-* [TASK_1](#URL_TASK_1): XXX
-* [TASK_2](#URL_TASK_2): XXX
+### Cálculos:
 
-# Task_1
+1. **rot13("success")** = `fhpprff`
+2. **md5("fhpprff")** = `38581812b435834ebf84ebcc2c6424d6`
 
-Intro...
+Por lo tanto, el valor del token y la frase será:
 
-![IMG](URL_IMG)
-
-Example code:
-
-```
-$ git clone https://github.com/openssh/openssh-portable
-$ patch -p1 < ~/path/to/openssh.patch
-$ autoreconf
-$ ./configure
-$ make
+```plaintext
+token=38581812b435834ebf84ebcc2c6424d6&phrase=success
 ```
 
-# Task_2
+Para obtener el token, podemos ejecutar la función `generate_token()` en la consola del navegador. Esto generará el valor correcto para el token.
+
+Ahora, podemos enviar el siguiente valor:
+
+En este caso, **`generate_token()`** es la función que se ejecuta en la consola para obtener el valor del token, lo que lo hace más interactivo y útil para el ejercicio.
+
+![generacionToken](assets/images/generateTokenJS.png)
+
+Para finalizar, debemos poner `ChangeMe` en el formulario y hacer clic en el botón **Submit** para completar el ejercicio.
+
+![lowResuelto](assets/images/jsLow.png)
+

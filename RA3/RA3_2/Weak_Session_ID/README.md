@@ -1,26 +1,9 @@
-# RA3_1
+# Weak Session IDs - DVWA
 
-Introduction [INTRO](URL_TASKS) :
+## Security Level: Low
 
-# Tasks
+En el nivel de seguridad bajo, el valor de la cookie es fácilmente predecible. Inicialmente, el valor es `0` y se incrementa en `1` cada vez que se regenera.
 
-* [TASK_1](#URL_TASK_1): XXX
-* [TASK_2](#URL_TASK_2): XXX
+## Security Level: Medium
 
-# Task_1
-
-Intro...
-
-![IMG](URL_IMG)
-
-Example code:
-
-```
-$ git clone https://github.com/openssh/openssh-portable
-$ patch -p1 < ~/path/to/openssh.patch
-$ autoreconf
-$ ./configure
-$ make
-```
-
-# Task_2
+En el nivel de seguridad medio, el valor de la cookie se establece utilizando el método `time();`. Esto hace que el valor de la cookie dependa del tiempo, lo que lo hace más difícil de predecir que en el nivel bajo, pero aún puede ser vulnerable dependiendo de la implementación.
