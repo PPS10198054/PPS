@@ -14,7 +14,7 @@ Jenkins requiere Java para su funcionamiento. Se utiliza OpenJDK 17:
 sudo apt install openjdk-17-jdk -y
 ```
 
-###1.2. Adición del repositorio oficial de Jenkins
+### 1.2. Adición del repositorio oficial de Jenkins
 
 ```bash
 curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \
@@ -25,21 +25,21 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 ```
 
-###1.3. Instalación de Jenkins
+### 1.3. Instalación de Jenkins
 
 ```bash
 sudo apt update
 sudo apt install jenkins -y
 ```
 
-###1.4. Inicio y habilitación del servicio Jenkins
+### 1.4. Inicio y habilitación del servicio Jenkins
 
 ```bash
 sudo systemctl start jenkins
 sudo systemctl enable jenkins
 ```
 
-###1.5. Acceso a Jenkins
+### 1.5. Acceso a Jenkins
 
 Navegar a: http://localhost:8080
 
@@ -50,14 +50,14 @@ Obtener la contraseña inicial con:
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 Una vez iniciada la sesión, se recomienda seguir el asistente de configuración e instalar los complementos sugeridos.
-###2. Instalación de Docker y Docker Compose
-###2.1. Instalación de Docker
+## 2. Instalación de Docker y Docker Compose
+### 2.1. Instalación de Docker
 ```bash
 sudo apt install docker.io -y
 sudo systemctl start docker
 sudo systemctl enable docker
 ```
-###2.2. Inclusión del usuario en el grupo docker
+### 2.2. Inclusión del usuario en el grupo docker
 
 Permite ejecutar comandos Docker sin necesidad de utilizar sudo:
 ```bash
@@ -65,19 +65,19 @@ sudo usermod -aG docker $USER
 ```
 Es necesario cerrar sesión o reiniciar el sistema para aplicar los cambios de grupo.
 
-###2.3. Instalación de Docker Compose
+### 2.3. Instalación de Docker Compose
 ```bash
 sudo apt install docker-compose -y
 ```
 
-###2.4. Verificación de la instalación
+### 2.4. Verificación de la instalación
 ```bash
 docker --version
 docker-compose --version
 ```
 
-###3. Automatización CI/CD con Jenkins
-###3.1. Pipeline básica (Jenkinsfile)
+## 3. Automatización CI/CD con Jenkins
+### 3.1. Pipeline básica (Jenkinsfile)
 
 Este pipeline define etapas típicas de compilación, prueba y despliegue:
 
@@ -95,7 +95,7 @@ Este archivo debe ser almacenado como Jenkinsfile en la raíz del repositorio y 
 
 ![Ver Jenkinsfile](assets/images/buildJenkins.png)
 
-###3.2. Pipeline con Docker (Jenkinsfile.docker)
+### 3.2. Pipeline con Docker (Jenkinsfile.docker)
 
 Se implementa una versión avanzada del pipeline que utiliza Docker para cada etapa del flujo de trabajo:
 Funcionalidades incluidas:
