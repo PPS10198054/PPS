@@ -43,7 +43,7 @@ sudo systemctl enable jenkins
 
 Navegar a: http://localhost:8080
 
-[Ver Jenkinsfile](assets/images/instalacionPlugins.png)
+![Ver Jenkinsfile](assets/images/instalacionPlugins.png)
 
 Obtener la contraseña inicial con:
 ```bash
@@ -93,7 +93,7 @@ La pipeline está configurada para ejecutarse automáticamente con cada `push` a
 
 Este archivo debe ser almacenado como Jenkinsfile en la raíz del repositorio y referenciado desde un job de tipo Pipeline en Jenkins.
 
-[Ver Jenkinsfile](assets/images/buildJenkins.png)
+![Ver Jenkinsfile](assets/images/buildJenkins.png)
 
 ###3.2. Pipeline con Docker (Jenkinsfile.docker)
 
@@ -112,7 +112,7 @@ Funcionalidades incluidas:
 
 Contenido del archivo Jenkinsfile.docker:
 
-[Ver Jenkinsfile](assets/Jenkinsfile.docker)
+[Ver Jenkinsfile Docker](assets/Jenkinsfile.docker)
 
 Este Jenkinsfile ejecuta cada paso de la CI dentro de contenedores Docker. Contiene los siguientes stages:
 
@@ -124,7 +124,7 @@ Este Jenkinsfile ejecuta cada paso de la CI dentro de contenedores Docker. Conti
 
 Archivo docker-compose.yml:
 
-[Ver Jenkinsfile](assets/docker-compose.yml)
+![Ver Docker Compose](assets/docker-compose.yml)
 
 ### Servicios definidos
 
@@ -145,4 +145,4 @@ docker compose -f RA5/RA5_1/assets/docker-compose.yml down
 
 Este archivo también debe estar en la raíz del repositorio.
 
-[Ver Jenkinsfile](assets/images/buildJenkinsDocker.png)
+![Ver Jenkinsfile](assets/images/buildJenkinsDocker.png)
