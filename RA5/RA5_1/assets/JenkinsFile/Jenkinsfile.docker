@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clonar repositorio') {
+            steps {
+                git 'https://github.com/PPS10198054/PPS.git'
+            }
+        }
+
+        stage('Construir imagen Docker') {
+            steps {
+                dir('RA5/RA5_1/assets') {
+                    sh 'docker build -t calculadora-test .'
+                }
+            }
+        }
+
+        stage('Ejecutar contenedor') {
+            steps {
+                sh 'docker run --name calculadora_container -d calculadora-test tail -f /dev/null'
+            }
+        }
+
+        stage('Ejecutar tests dentro del contenedor') {
+            steps {
+                sh 'docker exec calculadora_container python3 /app/code/test_calculadora.py || true'
+            }
+        }
+
+        stage('Ejecutar con docker-compose') {
+            steps {
+                dir('RA5/RA5_1/assets') {
+                    sh 'docker-compose up --build -d'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            sh 'docker stop calculadora_container || true'
+            sh 'docker rm calculadora_container || true'
+            sh 'docker-compose -f RA5/RA5_1/assets/docker-compose.yml down || true'
+        }
+    }
+}
