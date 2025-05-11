@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clonar repositorio') {
             steps {
-                git 'https://github.com/PPS10198054/PPS.git'
+                git branch: 'main', url: 'https://github.com/PPS10198054/PPS.git'
             }
         }
 
