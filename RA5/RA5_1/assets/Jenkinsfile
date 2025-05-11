@@ -2,17 +2,18 @@ pipeline {
     agent any
 
     triggers {
-        pollSCM('* * * * *') // Comprueba cada minuto si hay cambios
+        pollSCM('* * * * *')
     }
 
     stages {
         stage('Test') {
             steps {
-                dir('RA5_1/assets/code') {
-                    sh 'python3 -m unittest test_calculadora.py'
+                dir('RA5/RA5_1/assets/code') {
+                    sh 'python3 test_calculadora.py'
                 }
             }
         }
     }
 }
+
 
