@@ -8,10 +8,11 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                dir('RA5/RA5_1/assets/code') {
+                dir('RA5_1/assets/code') {
                     sh 'python3 -m unittest test_calculadora.py'
                 }
             }
         }
     }
 }
+
