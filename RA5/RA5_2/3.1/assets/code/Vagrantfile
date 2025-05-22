@@ -1,0 +1,27 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "BaseBox-lleo/Ubuntu24-04"
+  config.vm.hostname = "ubuntu2404-vm"
+  
+  # Configurar la red como pública en bridge igual que tu amigo, o usa private_network si prefieres
+  config.vm.network "private_network", ip: "192.168.56.101"
+  
+  config.vm.provider "virtualbox" do |vb|
+    vb.name = "ubuntu2404-vm"
+    vb.cpus = 2
+    vb.memory = 2048
+    vb.gui = true
+    vb.customize ["modifyvm", :id, "--ioapic", "on"]
+  end
+
+  # Configurar acceso SSH igual que tu amigo (usuario, password, insert_key)
+  config.ssh.username = "vagrant"
+  config.ssh.password = "vagrant"
+  config.ssh.insert_key = false
+  
+  # Deshabilitar carpeta compartida predeterminada para evitar problemas
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo apt-get update && sudo apt-get upgrade -y
+  SHELL
+end
