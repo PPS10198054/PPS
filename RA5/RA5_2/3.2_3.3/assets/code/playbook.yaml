@@ -1,0 +1,41 @@
+---
+- name: Configurar Ubuntu 24.04 con Apache y contenido web
+  hosts: vagrant
+  become: true
+
+  tasks:
+    - name: Actualizar el sistema (update & upgrade)
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Instalar Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Crear index.html con "Ansible rocks"
+      copy:
+        content: "Ansible rocks"
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
+
+    - name: Reiniciar Apache
+      service:
+        name: apache2
+        state: restarted
+
+    - name: Esperar 5 segundos a que Apache arranque
+      wait_for:
+        port: 80
+        timeout: 10
+
+    - name: Verificar contenido con curl
+      command: curl http://localhost
+      register: curl_output
+
+    - name: Mostrar salida del curl
+      debug:
+        var: curl_output.stdout
