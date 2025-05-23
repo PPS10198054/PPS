@@ -34,7 +34,10 @@ api_version: v1
 
 por
 
+```yaml
 api_version: v2
+```
+
 
 ![Captura de clonación y acceso al directorio](./assets/images/cambioApi.png)
 
