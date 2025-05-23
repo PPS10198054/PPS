@@ -53,7 +53,7 @@ docker-compose up -d
 
 ---
 
-## 4. Validación en el navegador
+### 4. Validación en el navegador
 
 Una vez que los contenedores estén levantados, abre tu navegador y verifica que los servicios estén funcionando:
 
@@ -83,7 +83,7 @@ Si todos estos servicios están accesibles y funcionando, tu stack de monitoreo 
 
 ---
 
-## 5. Verificación de Targets en Prometheus
+### 5. Verificación de Targets en Prometheus
 
 Además de acceder a los servicios vía navegador, puedes comprobar que Prometheus está recolectando métricas correctamente desde su interfaz:
 
