@@ -81,9 +81,6 @@ Grafana (cliente visualizador)
 
 - Se instaló Grafana desde su repositorio oficial y se habilitó como servicio.
 
-📸 Captura: Instalación de Grafana  
-![Instalación Grafana](./assets/images/instalacionGrafana.png)
-
 - Se accedió a Grafana en:  
   `http://localhost:3000`
 
