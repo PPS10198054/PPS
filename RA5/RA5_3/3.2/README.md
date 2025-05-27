@@ -1,81 +1,134 @@
-# 3.2. Stack de Monitorización: Ubuntu Server + Ubuntu Desktop
+# Stack de Monitorización: Ubuntu Server + Ubuntu Desktop (Prometheus + Node Exporter + Grafana)
 
-Este apartado describe cómo montar un stack de monitorización donde:
+Este documento detalla los pasos realizados para desplegar un stack de monitorización usando **Prometheus**, **Node Exporter** y **Grafana**, donde:
 
-- **Ubuntu Server 24.04** actúa como servidor de métricas, ejecutando Prometheus y Node Exporter.
-- **Ubuntu Desktop 24.04** (cliente) actúa como visualizador, ejecutando Grafana e importando el dashboard de Node Exporter.
+- **Ubuntu Server 24.04** actúa como el servidor de métricas.
+- **Ubuntu Desktop 24.10** actúa como cliente para visualización.
 
 ---
 
-## Estructura
+## 🧱 Infraestructura
 
 [ Ubuntu Server 24.04 ]
-Prometheus + Node Exporter
+Node Exporter + Prometheus
 |
-(Métricas expuestas)
 ↓
-[ Ubuntu Desktop 24.04 ]
-Grafana (cliente)
-Dashboard Node Exporter
+[ Ubuntu Desktop 24.10 ]
+Grafana (cliente visualizador)
 
 ---
 
-## 1. Instalación de Prometheus y Node Exporter en Ubuntu Server
+## ✅ 1. Instalación y configuración de Node Exporter en Ubuntu Server
 
-En el servidor, se instalaron y configuraron:
+1. Se descargó la última versión de Node Exporter desde GitHub:
+   ```bash
+   wget https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-amd64.tar.gz
+   tar xvfz node_exporter-1.9.1.linux-amd64.tar.gz
+   cd node_exporter-1.9.1.linux-amd64
+   ./node_exporter &
+   ```
 
-- **Prometheus** para recolectar métricas.
-- **Node Exporter** para exponer métricas del sistema (CPU, RAM, disco, etc.).
+---
+
+## ✅ 1. Instalación y configuración de Node Exporter en Ubuntu Server
+
+- Se descargó, descomprimió y ejecutó **Node Exporter** desde el sitio oficial.
+
+📸 Captura: Instalación de Node Exporter  
+![Node Exporter en ejecución](./assets/images/configuracionNodeExporter.png)
+
+- Se realizó una comprobación con `curl` para verificar que las métricas estuvieran accesibles en `http://localhost:9100/metrics`.
+
+📸 Captura: Resultado del `curl` a Node Exporter  
+![Verificación Node Exporter](./assets/images/curlMetricasNodeExporter.png)
+
+- También se configuró opcionalmente como servicio systemd para ejecución permanente.
+
+---
+
+## ✅ 2. Instalación y configuración de Prometheus en Ubuntu Server
+
+- Se instaló Prometheus mediante APT y se dejó ejecutando como servicio.
 
 📸 Captura: Instalación de Prometheus  
 ![Instalación Prometheus](./assets/images/instalacionPrometheus.png)
 
-📸 Captura: Prometheus ejecutándose correctamente  
-![Prometheus en ejecución](./assets/images/prometheusEnMarcha.png)
+- Se editó el archivo `/etc/prometheus/prometheus.yml` para definir los targets de monitoreo:
 
-> **Nota:** Asegúrate de que el puerto `9090` esté accesible desde la red para que Grafana pueda conectarse desde el cliente. Puedes comprobarlo con:
->
-> ```bash
-> sudo ufw allow 9090/tcp
-> ```
+  ```yaml
+  scrape_configs:
+
+    - job_name: 'prometheus'
+      static_configs:
+        - targets: ['localhost:9090']
+
+    - job_name: 'node'
+      static_configs:
+        - targets: ['localhost:9100']
+   ```
+
+
+- Se reinició el servicio para aplicar los cambios en Prometheus.
+
+- Prometheus quedó accesible desde:  
+  `http://10.112.5.99:9090/classic`
+
+- Se confirmó en la ruta `/classic/targets` que los jobs están activos y en estado **UP**.
 
 ---
 
-## 2. Instalación de Grafana en Ubuntu Desktop (cliente)
+## ✅ 3. Instalación y configuración de Grafana en el cliente Ubuntu Desktop
 
-En la máquina cliente se instaló Grafana siguiendo los pasos oficiales:
+- Se instaló Grafana desde su repositorio oficial y se habilitó como servicio.
+
+📸 Captura: Instalación de Grafana  
+![Instalación Grafana](./assets/images/instalacionGrafana.png)
+
+- Se accedió a Grafana en:  
+  `http://localhost:3000`
+
+- Se inició sesión con `admin/admin` y se actualizó la contraseña al primer inicio.
 
 ---
 
-## 3. Configuración de Prometheus como fuente de datos en Grafana
+## ✅ 4. Configuración de Prometheus como Data Source en Grafana
 
-Una vez Grafana está en marcha:
+- En Grafana se añadió Prometheus como fuente de datos:
 
-1. Se accede a [http://localhost:3000](http://localhost:3000).
-2. Se añade Prometheus como **Data Source** apuntando a la IP del servidor Prometheus (por ejemplo: `http://10.112.5.99:9090`).
-3. Se importa el Dashboard oficial de Node Exporter desde [Grafana Dashboards](https://grafana.com/grafana/dashboards/1860/).
+  - **URL utilizada:**  
+    `http://10.112.5.99:9090`
+
+- Se validó con éxito la conexión.
 
 📸 Captura: Añadir Prometheus como fuente de datos  
 ![Fuente de datos Prometheus](./assets/images/relacionarGrafanaPrometheus.png)
 
-📸 Captura: Dashboard de Node Exporter mostrando métricas del servidor  
+---
+
+## ✅ 5. Importación del Dashboard de Node Exporter
+
+- Desde Grafana se accedió a:  
+  **Dashboards → Import**
+
+- Se utilizó el ID `1860`, correspondiente al dashboard oficial de Node Exporter.
+
+- Se seleccionó el **data source Prometheus** configurado previamente.
+
+- Se visualizaron correctamente las métricas del servidor, como:
+
+  - CPU
+  - Memoria
+  - Disco
+  - Red
+
+📸 Captura: Dashboard Node Exporter mostrando métricas  
 ![Dashboard Node Exporter](./assets/images/dashboardImportado.png)
 
 ---
 
-## 4. Validación
+## 🧪 Validación Final
 
-- Desde Grafana en el cliente, puedes ver en tiempo real las métricas del servidor remoto (Ubuntu Server).
-- La comunicación se realiza vía HTTP entre Grafana y Prometheus.
-- Prometheus recolecta métricas locales a través de Node Exporter.
-
-> 💡 Consejo: Asegúrate de que ambos equipos estén en la misma red o que haya conectividad directa entre ellos para que Grafana pueda acceder a Prometheus.
-
----
-
-## Resultado Final
-
-El cliente Ubuntu Desktop puede visualizar de forma gráfica y remota el estado del servidor Ubuntu Server mediante Prometheus y Grafana, con métricas clave del sistema como CPU, memoria, red y disco.
-
----
-
+✔ Node Exporter está corriendo en el servidor y exponiendo métricas en el puerto 9100.  
+✔ Prometheus está recolectando las métricas configuradas.  
+✔ Grafana accede a Prometheus y representa métricas gráficamente desde otro equipo.  
+✔ El stack completo funciona de forma remota y en tiempo real.
